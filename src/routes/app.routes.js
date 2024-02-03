@@ -1,6 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "../pages/Dashboard";
+import SplashSCreenView from "../pages/SplashScreen";
 
 const Stack = createNativeStackNavigator();
 

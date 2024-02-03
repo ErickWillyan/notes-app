@@ -1,34 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, TextInput } from "react-native";
+import { ArrowLeft } from "phosphor-react-native";
 import styles from "./style";
 import {
   useFonts,
   Almarai_700Bold,
   Almarai_400Regular,
 } from "@expo-google-fonts/almarai";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Login() {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [fontsLoaded, fontError] = useFonts({
     Almarai_700Bold,
     Almarai_400Regular,
   });
 
-  useEffect(() => {
-    SplashScreen.preventAutoHideAsync().catch((error) => {
-      console.error(error);
-    });
-
-    SplashScreen.hideAsync().catch((error) => {
-      console.error(error);
-    });
-  }, []);
-
   async function handleSignIn() {
-    if (email === "" || password === "") {
+    if (email === "" || password === "" || name === "") {
       console.log("PREENCHA TODOS OS CAMPOS");
       return;
     }
@@ -38,46 +30,48 @@ export default function Login() {
     return null;
   }
 
-  const handleSingUp = () => {
-    navigation.navigate("singUp");
+  const exibir = () => {
+    console.log(name);
+    console.log(email);
+    console.log(password);
   };
   return (
     <View style={styles.view}>
-      <Image
-        style={styles.image}
-        source={require("../../assets/img/notesApp-logo.png")}
-        resizeMode="contain"
-      />
-
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <ArrowLeft style={styles.backButton} size={32} />
+      </TouchableOpacity>
       <View style={styles.forms}>
+        <Text style={[styles.textTitle, { fontFamily: "Almarai_700Bold" }]}>
+          Crie sua conta
+        </Text>
         <TextInput
           style={styles.textInput}
-          placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text) => setName(text)}
+          placeholder="Nome"
           placeholderTextColor="#423939"
         />
 
         <TextInput
           style={styles.textInput}
-          placeholder="Senha"
+          onChangeText={(text) => setEmail(text)}
+          placeholder="Email"
+          placeholderTextColor="#423939"
+        />
+        <TextInput
+          style={styles.textInput}
           onChangeText={(text) => setPassword(text)}
+          placeholder="Senha"
           placeholderTextColor="#423939"
         />
 
         <View style={styles.cardButton}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity onPress={exibir} style={styles.button}>
             <Text
               style={[styles.textButton, { fontFamily: "Almarai_700Bold" }]}
             >
-              Entrar
+              Cadastrar
             </Text>
           </TouchableOpacity>
-          <Text
-            onPress={handleSingUp}
-            style={[styles.linkText, { fontFamily: "Almarai_400Regular" }]}
-          >
-            Cadastre-se
-          </Text>
         </View>
       </View>
     </View>
