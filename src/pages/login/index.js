@@ -17,16 +17,6 @@ export default function Login() {
     Almarai_400Regular,
   });
 
-  useEffect(() => {
-    SplashScreen.preventAutoHideAsync().catch((error) => {
-      console.error(error);
-    });
-
-    SplashScreen.hideAsync().catch((error) => {
-      console.error(error);
-    });
-  }, []);
-
   async function handleSignIn() {
     if (email === "" || password === "") {
       console.log("PREENCHA TODOS OS CAMPOS");

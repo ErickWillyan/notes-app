@@ -8,7 +8,8 @@
     "splash": {
       "image": "./src/assets/img/notesApp-logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "showDuration": 3000
     },
     "assetBundlePatterns": [
       "**/*"

@@ -7,6 +7,7 @@ import {
   Almarai_700Bold,
   Almarai_400Regular,
 } from "@expo-google-fonts/almarai";
+import { CreateUserService } from "../../services/users/createUser";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Login() {
@@ -19,21 +20,24 @@ export default function Login() {
     Almarai_400Regular,
   });
 
-  async function handleSignIn() {
-    if (email === "" || password === "" || name === "") {
-      console.log("PREENCHA TODOS OS CAMPOS");
-      return;
-    }
-  }
-
   if (!fontsLoaded && !fontError) {
     return null;
   }
 
-  const exibir = () => {
-    console.log(name);
-    console.log(email);
-    console.log(password);
+  const singUp = async () => {
+    if (email === "" || password === "" || name === "") {
+      console.log("PREENCHA TODOS OS CAMPOS");
+      return;
+    }
+
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+    };
+
+    await CreateUserService(data);
+    navigation.navigate("Login");
   };
   return (
     <View style={styles.view}>
@@ -65,7 +69,7 @@ export default function Login() {
         />
 
         <View style={styles.cardButton}>
-          <TouchableOpacity onPress={exibir} style={styles.button}>
+          <TouchableOpacity onPress={singUp} style={styles.button}>
             <Text
               style={[styles.textButton, { fontFamily: "Almarai_700Bold" }]}
             >
