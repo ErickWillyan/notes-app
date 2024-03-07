@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { ArrowLeft } from "phosphor-react-native";
 import styles from "./style";
-import {
-  useFonts,
-  Almarai_700Bold,
-  Almarai_400Regular,
-} from "@expo-google-fonts/almarai";
 import { CreateUserService } from "../../services/users/createUser";
 import { useNavigation } from "@react-navigation/native";
 
@@ -15,14 +10,6 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [fontsLoaded, fontError] = useFonts({
-    Almarai_700Bold,
-    Almarai_400Regular,
-  });
-
-  if (!fontsLoaded && !fontError) {
-    return null;
-  }
 
   const singUp = async () => {
     if (email === "" || password === "" || name === "") {
@@ -45,9 +32,7 @@ export default function Login() {
         <ArrowLeft style={styles.backButton} size={32} />
       </TouchableOpacity>
       <View style={styles.forms}>
-        <Text style={[styles.textTitle, { fontFamily: "Almarai_700Bold" }]}>
-          Crie sua conta
-        </Text>
+        <Text style={styles.textTitle}>Crie sua conta</Text>
         <TextInput
           style={styles.textInput}
           onChangeText={(text) => setName(text)}
@@ -70,11 +55,7 @@ export default function Login() {
 
         <View style={styles.cardButton}>
           <TouchableOpacity onPress={singUp} style={styles.button}>
-            <Text
-              style={[styles.textButton, { fontFamily: "Almarai_700Bold" }]}
-            >
-              Cadastrar
-            </Text>
+            <Text style={styles.textButton}>Cadastrar</Text>
           </TouchableOpacity>
         </View>
       </View>

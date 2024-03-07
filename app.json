@@ -5,12 +5,6 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./src/assets/img/notesApp-logo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff",
-      "showDuration": 3000
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
