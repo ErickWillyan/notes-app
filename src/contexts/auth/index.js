@@ -4,6 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { api } from "../../libs/axios";
+import { signService } from "../../services/auth";
+import { getUserService } from "../../services/users/getUser";
 
 export const AuthContext = createContext({});
 
@@ -19,52 +21,46 @@ export default function AuthProvider({ children }) {
   const isAuthenticated = !!user.name;
 
   useEffect(() => {
-    // async function getUser() {
-    //   const userInfo = await AsyncStorage.getItem("@novusstatera");
-    //   let hasUser = JSON.parse(userInfo || "{}");
-    //   if (Object.keys(hasUser).length > 0) {
-    //     api.defaults.headers.common[
-    //       "Authorization"
-    //     ] = `Bearer ${hasUser.token}`;
-    //     setUser({
-    //       id: hasUser.id,
-    //       name: hasUser.name,
-    //       email: hasUser.email,
-    //       token: hasUser.token,
-    //     });
-    //   }
-    // }
-    // console.log(user);
-    // getUser();
+    async function getUser() {
+      const response = await getUserService();
+
+      setUser({
+        id: response.id,
+        name: response.name,
+        email: response.email,
+        token: response.token,
+      });
+    }
+    console.log(user);
+    getUser();
   }, []);
 
   async function singIn({ email, password }) {
-    try {
-      const response = await api.post("/AuthUser", { email, password });
+    const response = await signService({ email, password });
 
-      const { id, name, token } = response.data;
+    const { id, name, token } = response.data;
 
-      const data = {
-        ...response.data,
-      };
+    setUser({
+      id,
+      name,
+      email,
+      token,
+    });
+  }
 
-      await AsyncStorage.setItem("@notes-api", JSON.stringify(data));
-
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
+  async function singOut() {
+    await AsyncStorage.clear().then(() => {
       setUser({
-        id,
-        name,
-        email,
-        token,
+        id: "",
+        name: "",
+        email: "",
+        token: "",
       });
-    } catch (error) {
-      console.log("erro ao acessar", err);
-    }
+    });
   }
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, singIn }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, singIn, singOut }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,31 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./style";
-import {
-  useFonts,
-  Almarai_700Bold,
-  Almarai_400Regular,
-} from "@expo-google-fonts/almarai";
+import { AuthContext } from "../../contexts/auth";
 
 export default function Login() {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fontsLoaded, fontError] = useFonts({
-    Almarai_700Bold,
-    Almarai_400Regular,
-  });
+  const { singIn } = useContext(AuthContext);
 
   async function handleSignIn() {
     if (email === "" || password === "") {
       console.log("PREENCHA TODOS OS CAMPOS");
       return;
     }
-  }
 
-  if (!fontsLoaded && !fontError) {
-    return null;
+    await singIn({ email, password });
   }
 
   const handleSingUp = () => {
@@ -55,17 +46,10 @@ export default function Login() {
         />
 
         <View style={styles.cardButton}>
-          <TouchableOpacity style={styles.button}>
-            <Text
-              style={[styles.textButton, { fontFamily: "Almarai_700Bold" }]}
-            >
-              Entrar
-            </Text>
+          <TouchableOpacity onPress={handleSignIn} style={styles.button}>
+            <Text style={styles.textButton}>Entrar</Text>
           </TouchableOpacity>
-          <Text
-            onPress={handleSingUp}
-            style={[styles.linkText, { fontFamily: "Almarai_400Regular" }]}
-          >
+          <Text onPress={handleSingUp} style={styles.linkText}>
             Cadastre-se
           </Text>
         </View>

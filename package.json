@@ -9,7 +9,6 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@expo-google-fonts/almarai": "^0.2.3",
     "@expo/webpack-config": "^19.0.0",
     "@react-native-async-storage/async-storage": "^1.22.3",
     "@react-navigation/native": "^6.1.9",
@@ -18,8 +17,6 @@
     "axios": "^1.6.7",
     "expo": "~49.0.15",
     "expo-app-loading": "^2.1.1",
-    "expo-font": "~11.4.0",
-    "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "phosphor-react-native": "^2.0.0",
     "react": "18.2.0",
