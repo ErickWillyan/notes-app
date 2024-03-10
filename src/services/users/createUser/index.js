@@ -1,4 +1,4 @@
-import { api } from "../../libs/axios";
+import { api } from "../../../libs/axios";
 
 export const CreateUserService = async (input) => {
   try {

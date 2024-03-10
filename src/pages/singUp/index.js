@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import { ArrowLeft } from "phosphor-react-native";
-import styles from "./style";
-import { CreateUserService } from "../../services/users/createUser";
+import styles from "./styles";
+import { CreateUserService } from "../../services/users/getUser";
 import { useNavigation } from "@react-navigation/native";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -29,7 +29,12 @@ export default function Login() {
   return (
     <View style={styles.view}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <ArrowLeft style={styles.backButton} size={32} />
+        <AntDesign
+          style={styles.backButton}
+          name="arrowleft"
+          size={24}
+          color="black"
+        />
       </TouchableOpacity>
       <View style={styles.forms}>
         <Text style={styles.textTitle}>Crie sua conta</Text>

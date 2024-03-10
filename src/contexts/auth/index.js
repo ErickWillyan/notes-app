@@ -1,11 +1,8 @@
 import React, { useState, createContext, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import { api } from "../../libs/axios";
 import { signService } from "../../services/auth";
-import { getUserService } from "../../services/users/getUser";
+import { getUserService } from "../../services/users/getUser/";
 
 export const AuthContext = createContext({});
 
@@ -23,6 +20,7 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     async function getUser() {
       const response = await getUserService();
+      console.log("response", response);
 
       setUser({
         id: response.id,
@@ -31,7 +29,6 @@ export default function AuthProvider({ children }) {
         token: response.token,
       });
     }
-    console.log(user);
     getUser();
   }, []);
 

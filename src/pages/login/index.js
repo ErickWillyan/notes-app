@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import styles from "./style";
+import styles from "./styles";
 import { AuthContext } from "../../contexts/auth";
 
 export default function Login() {

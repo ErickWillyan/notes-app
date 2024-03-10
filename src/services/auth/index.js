@@ -9,11 +9,12 @@ export const signService = async (input) => {
     const data = {
       ...response.data,
     };
+
     await AsyncStorage.setItem("@notes-api", JSON.stringify(data));
 
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-    return response;
+    return console.log("exibir", data), response;
   } catch (error) {
     console.log("erro ao acessar", error);
   }
