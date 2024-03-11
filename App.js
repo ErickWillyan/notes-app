@@ -4,18 +4,21 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import Routes from "./src/routes";
 import AuthProvider from "./src/contexts/auth";
+import TaskProvider from "./src/contexts/taskContext";
 
 export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>
         <AuthProvider>
-          <StatusBar
-            backgroundColor="rgba(45, 48, 51, 0.6)"
-            barStyle="light-content"
-            translucent={false}
-          />
-          <Routes />
+          <TaskProvider>
+            <StatusBar
+              backgroundColor="rgba(45, 48, 51, 0.6)"
+              barStyle="light-content"
+              translucent={false}
+            />
+            <Routes />
+          </TaskProvider>
         </AuthProvider>
       </NavigationContainer>
     </SafeAreaView>

@@ -1,11 +1,9 @@
-import { useContext } from "react";
 import { api } from "../../../libs/axios";
-import { AuthContext } from "../../../contexts/auth";
 
 export const listTaskService = async (input) => {
   try {
-    const response = await api.get("/ListTask", { params: { input } });
-    console.log("exibindo", input);
+    const userId = input;
+    const response = await api.get("/ListTask", { params: { userId } });
 
     return response;
   } catch (error) {

@@ -14,7 +14,7 @@ export const signService = async (input) => {
 
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-    return console.log("exibir", data), response;
+    return response;
   } catch (error) {
     console.log("erro ao acessar", error);
   }
