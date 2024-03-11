@@ -20,7 +20,6 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     async function getUser() {
       const response = await getUserService();
-      console.log("response", response);
 
       setUser({
         id: response.id,

@@ -9,7 +9,7 @@ export const getUserService = async () => {
       api.defaults.headers.common["Authorization"] = `Bearer ${hasUser.token}`;
     }
 
-    return console.log("userinfo", hasUser), hasUser;
+    return hasUser;
   } catch (error) {
     throw (
       ({

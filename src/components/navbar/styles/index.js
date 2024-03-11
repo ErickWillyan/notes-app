@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   view: {
     alignItems: "center",
     flexDirection: "row",
-    paddingHorizontal: 21,
     justifyContent: "space-between",
     marginTop: 38,
   },
