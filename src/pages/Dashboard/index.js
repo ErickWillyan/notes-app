@@ -43,7 +43,7 @@ export default function Dashboard() {
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => <CardTask data={item} />}
       />
-      <Modal transparent={true} animationType="slide" visible={modalVisible}>
+      <Modal transparent={true} animationType="fade" visible={modalVisible}>
         <ModalNewTask close={modalClose} />
       </Modal>
     </View>

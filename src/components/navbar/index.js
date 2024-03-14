@@ -3,7 +3,6 @@ import styles from "./styles";
 import { View, Text } from "react-native";
 import { AuthContext } from "../../contexts/auth";
 import { Feather } from "@expo/vector-icons";
-import { TaskContext } from "../../contexts/taskContext";
 
 export default function navbar() {
   const { user, singOut } = useContext(AuthContext);
