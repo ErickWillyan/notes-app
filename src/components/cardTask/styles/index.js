@@ -22,6 +22,15 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     fontSize: 14,
   },
+
+  cardTaskDescriptionNone: {
+    justifyContent: "center",
+    paddingHorizontal: 25,
+    minHeight: 60,
+    marginBottom: 20,
+    backgroundColor: "#d6e2ef",
+    borderRadius: 20,
+  },
 });
 
 export default styles;

@@ -5,7 +5,6 @@ import styles from "./styles";
 import Navbar from "../../components/navbar";
 import { MaterialIcons } from "@expo/vector-icons";
 import CardTask from "../../components/cardTask";
-import { listTaskService } from "../../services/Task/listTask";
 import { TaskContext } from "../../contexts/taskContext";
 import ModalNewTask from "../modalNewTask";
 

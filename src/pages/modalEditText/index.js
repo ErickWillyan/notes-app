@@ -1,37 +1,51 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { View, TextInput, TouchableOpacity, Text } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import styles from "./styles";
-import { AuthContext } from "../../contexts/auth";
-import { CreateTaskService } from "../../services/Task/createTask";
 import { TaskContext } from "../../contexts/taskContext";
+import { EditTaskService } from "../../services/Task/editTask";
+import { DeleteTaskService } from "../../services/Task/deleteTask";
 
-export default function ModalNewTask(props) {
+export default function ModalEditTask(props) {
   const [name, setName] = useState();
   const [description, setDescription] = useState();
-  const { user } = useContext(AuthContext);
   const { listTask } = useContext(TaskContext);
 
-  async function handleCreateTask() {
-    const userId = user.id;
+  useEffect(() => {
+    setName(props.data.name);
+    setDescription(props.data.description);
+  }, []);
+
+  async function handleEditTask() {
+    const taskId = props.data.id;
     const data = {
       name,
       description,
-      userId,
+      taskId,
     };
 
-    await CreateTaskService(data);
+    await EditTaskService(data);
     await listTask();
 
     props.close();
   }
 
+  async function HandleDeleteTask() {
+    const taskId = props.data.id;
+
+    await DeleteTaskService(taskId);
+
+    await listTask();
+
+    props.close();
+  }
   return (
     <View style={styles.container}>
       <View style={styles.cardTask}>
         <View style={styles.titleView}>
           <TextInput
             placeholder="Nome da tarefa"
+            value={name}
             placeholderTextColor="rgba(134, 170, 206, 1)"
             onChangeText={(text) => setName(text)}
             style={styles.nameTask}
@@ -45,6 +59,7 @@ export default function ModalNewTask(props) {
         </View>
         <View style={styles.descriptionView}>
           <TextInput
+            value={description}
             placeholder="Descrição"
             multiline={true}
             placeholderTextColor="gray"
@@ -52,10 +67,17 @@ export default function ModalNewTask(props) {
             style={styles.descriptionTask}
           />
         </View>
-
-        <TouchableOpacity onPress={handleCreateTask} style={styles.button}>
-          <Text style={styles.buttonText}>Salvar</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonView}>
+          <TouchableOpacity onPress={handleEditTask} style={styles.button}>
+            <Text style={styles.buttonText}>Editar Tarefa</Text>
+          </TouchableOpacity>
+          <Feather
+            name="trash-2"
+            size={35}
+            color="#c44d4d"
+            onPress={HandleDeleteTask}
+          />
+        </View>
       </View>
     </View>
   );
