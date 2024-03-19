@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import styles from "./styles";
-import { CreateUserService } from "../../services/users/getUser";
+import { CreateUserService } from "../../services/users/createUser";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -47,7 +47,10 @@ export default function Login() {
 
         <TextInput
           style={styles.textInput}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text) => {
+            const lowEmail = text.toLowerCase();
+            setEmail(lowEmail);
+          }}
           placeholder="Email"
           placeholderTextColor="#423939"
         />

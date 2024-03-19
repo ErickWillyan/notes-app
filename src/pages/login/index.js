@@ -34,13 +34,17 @@ export default function Login() {
         <TextInput
           style={styles.textInput}
           placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text) => {
+            const lowEmail = text.toLowerCase();
+            setEmail(lowEmail);
+          }}
           placeholderTextColor="#423939"
         />
 
         <TextInput
           style={styles.textInput}
           placeholder="Senha"
+          secureTextEntry={true}
           onChangeText={(text) => setPassword(text)}
           placeholderTextColor="#423939"
         />
