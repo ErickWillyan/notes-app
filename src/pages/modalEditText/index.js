@@ -5,6 +5,7 @@ import styles from "./styles";
 import { TaskContext } from "../../contexts/taskContext";
 import { EditTaskService } from "../../services/Task/editTask";
 import { DeleteTaskService } from "../../services/Task/deleteTask";
+import Toast from "react-native-toast-message";
 
 export default function ModalEditTask(props) {
   const [name, setName] = useState();
@@ -17,6 +18,17 @@ export default function ModalEditTask(props) {
   }, []);
 
   async function handleEditTask() {
+    if (name == null || name == " " || name == "") {
+      Toast.show({
+        type: "error",
+        text1: "Tarefa não editada",
+        text2: "Nomeie a tarefa",
+        visibilityTime: 3000,
+      });
+
+      return;
+    }
+
     const taskId = props.data.id;
     const data = {
       name,
@@ -26,6 +38,11 @@ export default function ModalEditTask(props) {
 
     await EditTaskService(data);
     await listTask();
+    Toast.show({
+      type: "info",
+      text1: "Tarefa editada",
+      visibilityTime: 2000,
+    });
 
     props.close();
   }
@@ -36,6 +53,12 @@ export default function ModalEditTask(props) {
     await DeleteTaskService(taskId);
 
     await listTask();
+
+    Toast.show({
+      type: "success",
+      text1: "Tarefa deletada",
+      visibilityTime: 2000,
+    });
 
     props.close();
   }
@@ -79,6 +102,7 @@ export default function ModalEditTask(props) {
           />
         </View>
       </View>
+      <Toast />
     </View>
   );
 }

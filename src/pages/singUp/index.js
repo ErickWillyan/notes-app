@@ -4,6 +4,7 @@ import styles from "./styles";
 import { CreateUserService } from "../../services/users/createUser";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
+import Toast from "react-native-toast-message";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -13,7 +14,11 @@ export default function Login() {
 
   const singUp = async () => {
     if (email === "" || password === "" || name === "") {
-      console.log("PREENCHA TODOS OS CAMPOS");
+      Toast.show({
+        type: "error",
+        text1: "Preencha todos os campos",
+        visibilityTime: 3000,
+      });
       return;
     }
 
@@ -67,6 +72,7 @@ export default function Login() {
           </TouchableOpacity>
         </View>
       </View>
+      <Toast />
     </View>
   );
 }

@@ -7,10 +7,25 @@ import { MaterialIcons } from "@expo/vector-icons";
 import CardTask from "../../components/cardTask";
 import { TaskContext } from "../../contexts/taskContext";
 import ModalNewTask from "../modalNewTask";
+import Toast from "react-native-toast-message";
 
 export default function Dashboard() {
   const { task } = useContext(TaskContext);
   const [modalVisible, setModalVisible] = useState(false);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    function welcome() {
+      Toast.show({
+        type: "info",
+        text1: "Login Realizado",
+        text2: "Bem vindo " + user.name,
+        visibilityTime: 3000,
+      });
+    }
+
+    welcome();
+  }, [user]);
 
   function modalOpen() {
     setModalVisible(true);
@@ -45,6 +60,7 @@ export default function Dashboard() {
       <Modal transparent={true} animationType="fade" visible={modalVisible}>
         <ModalNewTask close={modalClose} />
       </Modal>
+      <Toast />
     </View>
   );
 }

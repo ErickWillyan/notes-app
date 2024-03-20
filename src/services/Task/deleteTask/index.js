@@ -6,7 +6,9 @@ export const DeleteTaskService = async (input) => {
     const response = await api.delete("/DeleteTask", { params: { taskId } });
 
     if (response.status < 400) {
-      return console.log(input);
+      return {
+        message: "tarefa criada",
+      };
     } else {
       return {
         error: true,

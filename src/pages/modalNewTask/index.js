@@ -5,6 +5,7 @@ import styles from "./styles";
 import { AuthContext } from "../../contexts/auth";
 import { CreateTaskService } from "../../services/Task/createTask";
 import { TaskContext } from "../../contexts/taskContext";
+import Toast from "react-native-toast-message";
 
 export default function ModalNewTask(props) {
   const [name, setName] = useState();
@@ -13,6 +14,17 @@ export default function ModalNewTask(props) {
   const { listTask } = useContext(TaskContext);
 
   async function handleCreateTask() {
+    if (name == null || name == " " || name == "") {
+      Toast.show({
+        type: "error",
+        text1: "Tarefa não criada",
+        text2: "Digite o nome da tarefa",
+        visibilityTime: 3000,
+      });
+
+      return;
+    }
+
     const userId = user.id;
     const data = {
       name,
@@ -22,7 +34,11 @@ export default function ModalNewTask(props) {
 
     await CreateTaskService(data);
     await listTask();
-
+    Toast.show({
+      type: "success",
+      text1: "Tarefa Criada",
+      visibilityTime: 2000,
+    });
     props.close();
   }
 
@@ -48,7 +64,9 @@ export default function ModalNewTask(props) {
             placeholder="Descrição"
             multiline={true}
             placeholderTextColor="gray"
-            onChangeText={(text) => setDescription(text)}
+            onChangeText={(text) =>
+              text == " " ? setDescription(null) : setDescription(text)
+            }
             style={styles.descriptionTask}
           />
         </View>
@@ -57,6 +75,7 @@ export default function ModalNewTask(props) {
           <Text style={styles.buttonText}>Salvar</Text>
         </TouchableOpacity>
       </View>
+      <Toast />
     </View>
   );
 }

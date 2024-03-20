@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import { AuthContext } from "../../contexts/auth";
+import Toast from "react-native-toast-message";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -12,7 +13,11 @@ export default function Login() {
 
   async function handleSignIn() {
     if (email === "" || password === "") {
-      console.log("PREENCHA TODOS OS CAMPOS");
+      Toast.show({
+        type: "error",
+        text1: "Preencha todos os campos",
+        visibilityTime: 3000,
+      });
       return;
     }
 
@@ -58,6 +63,7 @@ export default function Login() {
           </Text>
         </View>
       </View>
+      <Toast />
     </View>
   );
 }

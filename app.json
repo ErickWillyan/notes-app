@@ -6,10 +6,9 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/img/notesApp-logo.png",
-      "resizeMode": "reside",
-      "backgroundColor": "#ffffff",
-      "showDuration": 3000
+      "image": "./src/assets/img/splash.png",
+      "resizeMode": "contain",
+      "showDuration": 2000
     },
     "assetBundlePatterns": [
       "**/*"
