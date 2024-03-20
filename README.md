@@ -1,3 +1,6 @@
+*obs: O servidor deve estar rodando localmente em sua máquina para o aplicativo funcionar.<br><br>
+Repositório do servidor: https://github.com/ErickWillyan/notes-api<br><br>
+
 Como executar o App:<br><br>
 
 - Clone o repositório;<br><br>
