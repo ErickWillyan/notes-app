@@ -4,6 +4,7 @@ import { Feather } from "@expo/vector-icons";
 import styles from "./styles";
 import { TaskContext } from "../../contexts/taskContext";
 import { EditTaskService } from "../../services/Task/editTask";
+import { StatusBar } from "expo-status-bar";
 import { DeleteTaskService } from "../../services/Task/deleteTask";
 import Toast from "react-native-toast-message";
 
@@ -103,6 +104,7 @@ export default function ModalEditTask(props) {
         </View>
       </View>
       <Toast />
+      <StatusBar backgroundColor="rgba(0, 0, 0, 0.4)" translucent={false} />
     </View>
   );
 }

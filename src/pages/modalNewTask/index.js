@@ -6,6 +6,7 @@ import { AuthContext } from "../../contexts/auth";
 import { CreateTaskService } from "../../services/Task/createTask";
 import { TaskContext } from "../../contexts/taskContext";
 import Toast from "react-native-toast-message";
+import { StatusBar } from "expo-status-bar";
 
 export default function ModalNewTask(props) {
   const [name, setName] = useState();
@@ -75,7 +76,9 @@ export default function ModalNewTask(props) {
           <Text style={styles.buttonText}>Salvar</Text>
         </TouchableOpacity>
       </View>
+
       <Toast />
+      <StatusBar backgroundColor="rgba(0, 0, 0, 0.4)" translucent={false} />
     </View>
   );
 }

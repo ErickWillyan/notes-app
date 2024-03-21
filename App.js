@@ -13,7 +13,7 @@ export default function App() {
         <AuthProvider>
           <TaskProvider>
             <StatusBar
-              backgroundColor="rgba(45, 48, 51, 0.6)"
+              backgroundColor="#fff"
               barStyle="light-content"
               translucent={false}
             />
